@@ -30,6 +30,7 @@ return new class extends Migration {
 			$table->string('text')->nullable();
 			$table->string('type')->nullable();
 			$table->string('status')->nullable();
+			$table->string('youtube_video_id')->nullable();
 			$table->datetime('published_at')->nullable();
 			$table->timestamps();
 		});

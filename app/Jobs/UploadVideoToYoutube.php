@@ -73,10 +73,10 @@ class UploadVideoToYoutube implements ShouldQueue
 			$client->setDefer(false);
 
 			info('Video uploaded successfully!... video_id:'. $status['id']);
+
+			$this->short->update(['published_at' => now(), 'youtube_video_id' => $status['id']]);
 		} catch (Exception $e) {
 			info($e->getMessage());
 		}
-
-		$this->short->update(['published_at' => now()]);
 	}
 }
