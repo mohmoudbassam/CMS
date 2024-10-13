@@ -9,24 +9,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ChoiceVideo implements ShouldQueue
 {
-    use Queueable;
+	use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(public $short)
-    {
+	/**
+	 * Create a new job instance.
+	 */
+	public function __construct(public $short)
+	{
 
-    }
+	}
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-        $path = (new VideoService())->getRandomVideo(Storage::disk('public')->path('videos'));
+	/**
+	 * Execute the job.
+	 */
+	public function handle(): void
+	{
+		$path = (new VideoService())->getRandomVideo(Storage::disk('public')->path('videos'));
 
-        $this->short->video_without_sound_path = Storage::disk('public')->path('/videos/'.$path);
-        $this->short->save();
-    }
+		$this->short->video_without_sound_path = Storage::disk('public')->path('/videos/'.$path);
+		$this->short->save();
+	}
 }

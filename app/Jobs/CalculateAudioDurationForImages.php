@@ -7,23 +7,23 @@ use Illuminate\Foundation\Queue\Queueable;
 
 class CalculateAudioDurationForImages implements ShouldQueue
 {
-    use Queueable;
+	use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(public $short)
-    {
-        //
-    }
+	/**
+	 * Create a new job instance.
+	 */
+	public function __construct(public $short)
+	{
+		//
+	}
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-        $images_number = $this->short->media()->where('type', 'image')->count();
-        $image_audio_duration = (ceil($this->short->audio_duration / $images_number));
-        $this->short->update(['video_image_duration' => $image_audio_duration]);
-    }
+	/**
+	 * Execute the job.
+	 */
+	public function handle(): void
+	{
+		$images_number = $this->short->media()->where('type', 'image')->count();
+		$image_audio_duration = (ceil($this->short->audio_duration / $images_number));
+		$this->short->update(['video_image_duration' => $image_audio_duration]);
+	}
 }

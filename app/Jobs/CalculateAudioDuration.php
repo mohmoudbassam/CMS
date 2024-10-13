@@ -8,23 +8,23 @@ use Illuminate\Foundation\Queue\Queueable;
 
 class CalculateAudioDuration implements ShouldQueue
 {
-    use Queueable;
+	use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(public $short)
-    {
-        //
-    }
+	/**
+	 * Create a new job instance.
+	 */
+	public function __construct(public $short)
+	{
+		//
+	}
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-        $duration = (new AudioService())->calculateAudioDuration($this->short->audio_path);
-        $this->short->update(['audio_duration' => $duration]);
+	/**
+	 * Execute the job.
+	 */
+	public function handle(): void
+	{
+		$duration = (new AudioService())->calculateAudioDuration($this->short->audio_path);
+		$this->short->update(['audio_duration' => $duration]);
 
-    }
+	}
 }

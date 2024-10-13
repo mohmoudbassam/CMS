@@ -8,24 +8,22 @@ use Illuminate\Foundation\Queue\Queueable;
 
 class ConvertScriptToSound implements ShouldQueue
 {
-    use Queueable;
+	use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(public $short)
-    {
-        //
-    }
+	/**
+	 * Create a new job instance.
+	 */
+	public function __construct(public $short)
+	{
+		//
+	}
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-
-        $soundPath = (new AudioService())->convertTextToSound($this->short->script);
-        $this->short->update(['audio_path' => $soundPath]);
-
-    }
+	/**
+	 * Execute the job.
+	 */
+	public function handle(): void
+	{
+		$soundPath = (new AudioService())->convertTextToSound($this->short->script);
+		$this->short->update(['audio_path' => $soundPath]);
+	}
 }

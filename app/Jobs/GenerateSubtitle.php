@@ -2,11 +2,11 @@
 
 namespace App\Jobs;
 
-use App\Services\VideoService;
+use App\Services\AudioService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class MakeVideoSilent implements ShouldQueue
+class GenerateSubtitle implements ShouldQueue
 {
 	use Queueable;
 
@@ -23,9 +23,7 @@ class MakeVideoSilent implements ShouldQueue
 	 */
 	public function handle(): void
 	{
-		$path = (new VideoService())->makeVideoSilent($this->short->video_without_sound_path);
-		$this->short->video_without_sound_path = $path;
-		$this->short->save();
-
+		$subtitle_path = (new AudioService())->generateSubtitle($this->short);
+		$this->short->update(['subtitle_path' => $subtitle_path]);
 	}
 }
