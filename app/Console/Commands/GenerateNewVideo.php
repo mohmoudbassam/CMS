@@ -72,7 +72,7 @@ class GenerateNewVideo extends Command
 	private function createNewVideoScript()
 	{
 		$suggestion = Interest::query()->inRandomOrder()->first();
-		$textToAi = 'Can you give me a creative story for 10 minutes that can be helpful for '.$suggestion->name . '? Provide also a good title and description for the story to use them as youtube video title and description. Also provide tags for the youtube video. 
+		$textToAi = 'Can you give me a creative story for 10 minutes that can be helpful for '.$suggestion->name . '? Provide also a good title and description for the story to use them as youtube video title and description. Also provide tags for the youtube video. Make sure to add relative hashtags to the title and description. 
 		I want the response to be with this format: {"title": story_title, "description": video_description, "tags": video_tags, "story": story_text}';
 
 		$messages = [
