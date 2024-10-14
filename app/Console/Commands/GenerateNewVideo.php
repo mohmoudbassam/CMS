@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\CreateVideoJob;
+use App\Jobs\CreateVideo;
 use App\Models\Interest;
 use App\Models\Short;
 use App\Services\SuggestionService;
@@ -54,7 +54,7 @@ class GenerateNewVideo extends Command
 		$short = $this->createNewVideoScript($country, $type);
 
 		if ($short) {
-			CreateVideoJob::dispatch($short, $refresh_token);
+			CreateVideo::dispatch($short, $refresh_token);
 		}
 	}
 

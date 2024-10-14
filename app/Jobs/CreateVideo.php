@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Bus;
 
-class CreateVideoJob implements ShouldQueue
+class CreateVideo implements ShouldQueue
 {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -25,6 +25,7 @@ class CreateVideoJob implements ShouldQueue
 			new GenerateSubtitle($this->short),
 			new CalculateAudioDuration($this->short),
 			new ChoiceVideo($this->short),
+			new CalculateVideoDuration($this->short),
 			new CutVideo($this->short),
 			new MakeVideoSilent($this->short),
 			new MergeVideoWithAudio($this->short),
