@@ -17,7 +17,7 @@ class GenerateNewVideo extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'app:new-video';
+	protected $signature = 'new-video';
 
 	/**
 	 * The console command description.
@@ -45,8 +45,8 @@ class GenerateNewVideo extends Command
 		);
 		$refresh_token = match ($country) {
 			'Canada' => env('YOUTUBE_REFRESH_TOKEN_CA'),
-			'Sweden' => env('YOUTUBE_REFRESH_TOKEN_SE'),
-			'Germany' => env('YOUTUBE_REFRESH_TOKEN_DE'),
+			'Sweden' => env('YOUTUBE_REFRESH_TOKEN_SW'),
+			'Germany' => env('YOUTUBE_REFRESH_TOKEN_GE'),
 		};
 
 		$this->ensureDirectoriesCreated();
@@ -92,10 +92,15 @@ class GenerateNewVideo extends Command
 		if (empty($ai_response['title']) || empty($ai_response['content']) || empty($ai_response['description']) || empty($ai_response['tags'])) {
 			return null;
 		}
+		dump([
+			'title' => $ai_response['title'],
+			'description' => $ai_response['description'],
+			'tags' => is_array($ai_response['tags']) ? implode(',', $ai_response['tags']) : $ai_response['tags'],
+		]);
 		return Short::query()->create([
 			'title' => $ai_response['title'],
 			'description' => $ai_response['description'],
-			'tags' => implode(',', $ai_response['tags']),
+			'tags' => is_array($ai_response['tags']) ? implode(',', $ai_response['tags']) : $ai_response['tags'],
 			'script' => $ai_response['content'],
 			'content' => $ai_response['content'],
 			'interest_id' => $suggestion->id,
