@@ -26,10 +26,6 @@ class CleanUp implements ShouldQueue
 			->each(function ($file) {
 				File::delete($file->getPathname());
 			});
-		collect(File::allFiles(storage_path('app/public/videos')))
-			->each(function ($file) {
-				File::delete($file->getPathname());
-			});
 		collect(File::allFiles(storage_path('app/public/final')))
 			->each(function ($file) {
 				File::delete($file->getPathname());
