@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Short;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -12,7 +13,7 @@ class CalculateAudioDurationForImages implements ShouldQueue
 	/**
 	 * Create a new job instance.
 	 */
-	public function __construct(public $short)
+	public function __construct(public Short $short)
 	{
 		//
 	}

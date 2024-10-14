@@ -20,7 +20,7 @@ class UploadVideoToYoutube implements ShouldQueue
 {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-	public function __construct(public Short $short)
+	public function __construct(public Short $short, public null|string $refresh_token = null)
 	{
 	}
 
@@ -30,7 +30,7 @@ class UploadVideoToYoutube implements ShouldQueue
 		$client->setClientId(env('GOOGLE_CLIENT_ID'));
 		$client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
 		$client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
-		$client->refreshToken(env('YOUTUBE_ACCOUNT_REFRESH_TOKEN'));
+		$client->refreshToken($this->refresh_token ?? env('YOUTUBE_REFRESH_TOKEN_CA'));
 
 		$youtube = new Google_Service_YouTube($client);
 

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Media;
+use App\Models\Short;
 use App\Services\ImageService;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,7 +14,7 @@ class GenerateImages implements ShouldQueue
 {
 	use Queueable;
 
-	public function __construct(public $short, public $search)
+	public function __construct(public Short $short, public $search)
 	{
 
 	}

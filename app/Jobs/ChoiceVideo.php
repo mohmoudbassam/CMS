@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Short;
 use App\Services\VideoService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -14,7 +15,7 @@ class ChoiceVideo implements ShouldQueue
 	/**
 	 * Create a new job instance.
 	 */
-	public function __construct(public $short)
+	public function __construct(public Short $short)
 	{
 
 	}
