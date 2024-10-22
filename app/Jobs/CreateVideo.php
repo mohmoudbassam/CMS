@@ -31,7 +31,6 @@ class CreateVideo implements ShouldQueue
 			new MergeVideoWithAudio($this->short),
 			new MergeVideoWithSubtitle($this->short),
 			new UploadVideoToYoutube($this->short, $this->refresh_token),
-			new CleanUp(),
 		])->dispatch();
 	}
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Str;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ImageService
@@ -18,7 +19,7 @@ class ImageService
 		$image = Storage::disk('public')->path($image);
 		//generate random video name
 
-		$videoPath = storage_path('app/public/temp/'.time().'.mp4');
+		$videoPath = storage_path('app/public/temp/'.time().Str::random().'.mp4');
 		exec("ffmpeg -y -loop 1 -i $image  -c:v libx264 -t 15 -pix_fmt yuv420p -vf scale=320:240 $videoPath");
 		return $videoPath;
 	}

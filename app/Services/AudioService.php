@@ -7,6 +7,7 @@ use FFMpeg\FFProbe;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use OpenAI\Laravel\Facades\OpenAI;
+use Str;
 
 class AudioService
 {
@@ -21,7 +22,7 @@ class AudioService
 			'voice' => 'alloy', // Select from available voices
 		]);
 
-		$audioName = 'generated_speech_'.time().'.mp3';
+		$audioName = 'generated_speech_'.time().Str::random().'.mp3';
 		$audioPath = Storage::disk('public')->path('/audio/'.$audioName);
 
 		file_put_contents($audioPath, $response->getBody());

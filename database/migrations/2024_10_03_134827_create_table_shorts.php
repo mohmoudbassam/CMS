@@ -12,7 +12,7 @@ return new class extends Migration {
 	{
 		Schema::create('shorts', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('interest_id')->constrained();
+			$table->foreignId('interest_id')->nullable()->constrained();
 			$table->string('title')->nullable();
 			$table->text('description')->nullable();
 			$table->text('tags')->nullable();

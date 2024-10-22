@@ -5,6 +5,7 @@ namespace App\Services;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
+use Str;
 
 class OpenAiImageService
 {
@@ -37,7 +38,7 @@ class OpenAiImageService
 		$imageData = base64_decode($imageBase64);
 
 		// Define the image name and path (you can modify the name based on your logic)
-		$imageName = 'images/generated_image_'.time().'.png';
+		$imageName = 'images/generated_image_'.time().Str::random().'.png';
 
 		Storage::disk('public')->put($imageName, $imageData);
 
@@ -83,7 +84,7 @@ class OpenAiImageService
 
 		$imageBase64 = json_decode($response->getBody()->getContents(), true)['data'][0]['b64_json'];
 		$imageData = base64_decode($imageBase64);
-		$imageName = 'images/generated_image_'.time().'.png';
+		$imageName = 'images/generated_image_'.time().Str::random().'.png';
 
 		$path = Storage::disk('public')->put($imageName, $imageData);
 

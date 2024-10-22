@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CleanUp;
 use App\Jobs\CreateVideo;
 use App\Models\Interest;
 use App\Models\Short;
@@ -55,6 +56,8 @@ class GenerateNewVideo extends Command
 
 		if ($short) {
 			CreateVideo::dispatch($short, $refresh_token);
+
+			CleanUp::dispatch();
 		}
 	}
 

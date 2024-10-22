@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Storage;
+use Str;
 
 class GenerateImages implements ShouldQueue
 {
@@ -38,7 +39,7 @@ class GenerateImages implements ShouldQueue
 			}
 
 			// Extract image file name
-			$imageName = time().'.png';
+			$imageName = time().Str::random().'.png';
 			// Save image to storage/app/public directory
 			Storage::disk('public')->put("images/{$imageName}", $imageContent);
 

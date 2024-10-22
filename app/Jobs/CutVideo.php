@@ -25,7 +25,8 @@ class CutVideo implements ShouldQueue
 	public function handle(): void
 	{
 		$this->checkVideoDuration();
-		$path = (new VideoService())->cutVideo($this->short->video_without_sound_path, 0, $this->short->audio_duration);
+		$start_time = rand(0, $this->short->video_duration - $this->short->audio_duration);
+		$path = (new VideoService())->cutVideo($this->short->video_without_sound_path, $start_time, $start_time + $this->short->audio_duration);
 		$this->short->video_without_sound_path = $path;
 		$this->short->save();
 	}
